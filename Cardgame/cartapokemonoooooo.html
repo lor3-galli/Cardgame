@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="retro.png" onclick="gira()"/>
+
+<script>
+    let carta=document.querySelector("img")
+    function gira() {
+    if (carta.src.includes('retro.png'))
+        carta.src= "SM11_IT_55.png"
+    else
+        carta.src= "retro.png"
+    }
+
+    </script>
+</body>
+
+</html>
