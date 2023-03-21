@@ -19,23 +19,39 @@
     <div id="tavoloDaGioco"></div>
 
     <script>
-        carte = ["11-2312.jpg", "886001659_L.jpg", "Yu-Gi-Oh-Carte-Mago.jpg", "carte-yu-gi-oh.jpg", "11-2314.jpg", "Cartapokemon.jpg", "12-219.jpg", "News9268.jpg", "49-1463.jpg", "s-l300.jpg", "s-l225.jpg", "12.jpg", "yu8.jpg", "140.jpg", "60.jpg", "104.jpg", "11-2319.jpg", "1234.jpg"],
-
-        tavolo = document.querySelector('#tavoloDaGioco')
-
+    let NcarteGirate = 0
+    let primaCartGirata = null
+    let carte = ["11-2314.jpg", "News9268.jpg", "yu8.jpg", "Cartapokemon.jpg", "11-2312.jpg", "carte-yu-gi-oh.jpg", "49-1463.jpg", "886001659_L.jpg", "12-219.jpg", "s-l225.jpg", "s-l300.jpg", "104.jpg", "Yu-Gi-Oh-Carte-Mago.jpg", "140.jpg", "11-2319.jpg", "12.jpg", "1234.jpg", "60.jpg", "11-2312.jpg", "886001659_L.jpg", "Yu-Gi-Oh-Carte-Mago.jpg", "carte-yu-gi-oh.jpg", "11-2314.jpg", "Cartapokemon.jpg", "12-219.jpg", "News9268.jpg", "49-1463.jpg", "12.jpg", "s-l225.jpg", "s-l300.jpg", "yu8.jpg", "140.jpg", "60.jpg", "104.jpg", "1234.jpg", "11-2319.jpg"]
+    let tavolo = document.querySelector('#tavoloDaGioco')
         carte.forEach(element => {
             tavolo.innerHTML += '<img id="'+element+'" src="yugiohretro.jpg" onclick="gira(this)" />'
             console.log('<img id="'+element+'" src="yugiohretro.jpg" />')
         });
 
         function gira(carta) {
-            console.log('GIRA')
-            console.log(carta.src)
-            if (carta.src.includes("retro"))
-                carta.src = carta.id
-            else
+         NcarteGirate++
+         carta.src = carta.id
+         console.log(carta.src)
+         if(NcarteGirate == 1)
+           primaCartGirata = carta
+        else{
+            NcarteGirate = 0
+            if(carta.src == primaCartGirata.src)
+            console.log('BRAVO +1 punto')
+            else {
+                console.log('RIPROVACI')
+                setTimeout(()=>{
                 carta.src = "yugiohretro.jpg"
-        }
+                primaCartGirata.src = "yugiohretro.jpg"
+
+                }, 2000)
+                
+            }
+
+          }
+            
+                //carta.src = "yugiohretro.jpg"
+    }
     </script>
 </body>
 
