@@ -1,58 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+
     <style>
         img {
-            width: 100px;
+            width: 145px;
+        }
+
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        
+        .counter {
+            font-size: 50px;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+        }
+        body {
+            background-color: lightblue;
+        }
+        h1 {
+            text-align: center;
         }
     </style>
 </head>
 
+
 <body>
+    
 
     <div id="tavoloDaGioco"></div>
+    <div class="container">
+        <span class="counter">Punti =</span>&nbsp&nbsp<span id="counter" class="counter">0</span>
+    </div>
+
 
     <script>
-    let NcarteGirate = 0
-    let primaCartGirata = null
-    let carte = ["11-2314.jpg", "News9268.jpg", "yu8.jpg", "Cartapokemon.jpg", "11-2312.jpg", "carte-yu-gi-oh.jpg", "49-1463.jpg", "886001659_L.jpg", "12-219.jpg", "s-l225.jpg", "s-l300.jpg", "104.jpg", "Yu-Gi-Oh-Carte-Mago.jpg", "140.jpg", "11-2319.jpg", "12.jpg", "1234.jpg", "60.jpg", "11-2312.jpg", "886001659_L.jpg", "Yu-Gi-Oh-Carte-Mago.jpg", "carte-yu-gi-oh.jpg", "11-2314.jpg", "Cartapokemon.jpg", "12-219.jpg", "News9268.jpg", "49-1463.jpg", "12.jpg", "s-l225.jpg", "s-l300.jpg", "yu8.jpg", "140.jpg", "60.jpg", "104.jpg", "1234.jpg", "11-2319.jpg"]
-    let tavolo = document.querySelector('#tavoloDaGioco')
+        
+        carte = ["11-2314.jpg", "News9268.jpg", "yu8.jpg", "Cartapokemon.jpg", "11-2312.jpg", "carte-yu-gi-oh.jpg", "49-1463.jpg", "886001659_L.jpg", "12-219.jpg", "s-l225.jpg", "s-l300.jpg", "104.jpg", "Yu-Gi-Oh-Carte-Mago.jpg", "140.jpg", "11-2319.jpg", "12.jpg", "1234.jpg", "60.jpg", "11-2312.jpg", "886001659_L.jpg", "Yu-Gi-Oh-Carte-Mago.jpg", "carte-yu-gi-oh.jpg", "11-2314.jpg", "Cartapokemon.jpg", "12-219.jpg", "News9268.jpg", "49-1463.jpg", "12.jpg", "s-l225.jpg", "s-l300.jpg", "yu8.jpg", "140.jpg", "60.jpg", "104.jpg", "1234.jpg", "11-2319.jpg"]
+
+      
+        let NcarteGirate = 0;
+        let primaCartaGirata = null
+        tavolo = document.querySelector('#tavoloDaGioco')
+        var counter = document.getElementById("counter");
+        var count = 0;
+        carte.sort(() => Math.random() - 0.5);
         carte.forEach(element => {
-            tavolo.innerHTML += '<img id="'+element+'" src="yugiohretro.jpg" onclick="gira(this)" />'
-            console.log('<img id="'+element+'" src="yugiohretro.jpg" />')
+            tavolo.innerHTML += '<img id="' + element + '" src="yugiohretro.jpg" onclick="gira(this)" />'
+            console.log('<img id="' + element + '"src=yugiohretro.jpg" />')
         });
 
+
+        
         function gira(carta) {
-         NcarteGirate++
-         carta.src = carta.id
-         console.log(carta.src)
-         if(NcarteGirate == 1)
-           primaCartGirata = carta
-        else{
-            NcarteGirate = 0
-            if(carta.src == primaCartGirata.src)
-            console.log('BRAVO +1 punto')
+            NcarteGirate++
+            console.log(NcarteGirate)
+            carta.src = carta.id
+            if (NcarteGirate == 1)
+                primaCartaGirata = carta
             else {
-                console.log('RIPROVACI')
-                setTimeout(()=>{
-                carta.src = "yugiohretro.jpg"
-                primaCartGirata.src = "yugiohretro.jpg"
+                NcarteGirate = 0
+                if (carta.src == primaCartaGirata.src) {
+                    count++; 
+                    counter.textContent = count;
+                } else {
+                    setTimeout(function() {
 
-                }, 2000)
-                
+                        carta.src = "yugiohretro.jpg";
+                        primaCartaGirata.src = "yugiohretro.jpg";
+                    }, 1000);
+                }
             }
-
-          }
-            
-                //carta.src = "yugiohretro.jpg"
-    }
+            counter.textContent = count;
+            if (count == 2) {
+            var h1 = document.createElement("h1");
+            h1.textContent = "Bravo hai vinto!";
+            document.body.appendChild(h1);
+            }
+        }
     </script>
 </body>
+
 
 </html>
